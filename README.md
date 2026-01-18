@@ -38,6 +38,17 @@ A dedicated `train_distill.py` script to heal PPL degradation via KL-Divergence 
 *   **Student:** Converted MLA Model (BF16)
 *   **Objective:** Minimize distributional shift between Teacher and Student logits.
 
+## 🚧 Roadmap & Status
+
+**Current Phase: Phase 1 (SVD Conversion)**
+
+- [x] **Data Engineering:** Generate SOTA calibration datasets (SWA/Full/Mixed).
+- [x] **Diagnostics:** Confirm 20B model architecture is healthy (No sink/routing collapse).
+- [ ] **SVD Conversion:** Implement `convert_to_mla.py` using "TransMLA v2" logic (Exact RoPE-K + Compressed Content-KV).
+- [ ] **Healing:** Run KL-Divergence Distillation on L40S using the `calib_mixed_golden` dataset.
+- [ ] **Inference:** Integrate with SGLang/FlashInfer for efficient MLA decoding.
+- [ ] **Release:** Publish `gpt-oss-20b-mla` weights with < 3.0 PPL.
+
 ## Usage
 ```bash
 pip install -r requirements.txt
@@ -48,6 +59,5 @@ python data_pipeline/generate_rfc_data.py
 # Run Analysis
 python analysis/1_check_sinks.py --model "openai/gpt-oss-20b"
 ```
-## License
-
+## License 
 MIT

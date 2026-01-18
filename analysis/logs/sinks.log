@@ -1,0 +1,7 @@
+--- Analysis Results GPT OSS 20B ---
+Layer 0: Sink Norm: 125.00 | Rest Norm: 133.59 | Ratio: 0.9x
+Layer 1: Sink Norm: 146.00 | Rest Norm: 167.33 | Ratio: 0.9x
+Layer 2: Sink Norm: 60.19 | Rest Norm: 60.44 | Ratio: 1.0x
+Layer 21: Sink Norm: 184.00 | Rest Norm: 190.19 | Ratio: 1.0x
+Layer 22: Sink Norm: 27.81 | Rest Norm: 29.86 | Ratio: 0.9x
+Layer 23: Sink Norm: 109.25 | Rest Norm: 110.26 | Ratio: 1.0x

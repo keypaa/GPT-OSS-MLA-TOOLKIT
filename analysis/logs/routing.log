@@ -1,0 +1,54 @@
+Hooking Router layers...
+Registered hooks on 24 router layers.
+Running inference...
+
+--- Routing Analysis ---
+Captured 24 routing events across layers.
+Layer 0: Used 23 unique experts.
+   Top Expert Load: 11.2% (Expert 9)
+Layer 1: Used 24 unique experts.
+   Top Expert Load: 11.2% (Expert 0)
+Layer 2: Used 22 unique experts.
+   Top Expert Load: 12.5% (Expert 21)
+Layer 3: Used 15 unique experts.
+   Top Expert Load: 13.8% (Expert 2)
+Layer 4: Used 19 unique experts.
+   Top Expert Load: 18.8% (Expert 6)
+Layer 5: Used 18 unique experts.
+   Top Expert Load: 21.2% (Expert 24)
+Layer 6: Used 19 unique experts.
+   Top Expert Load: 15.0% (Expert 24)
+Layer 7: Used 23 unique experts.
+   Top Expert Load: 10.0% (Expert 10)
+Layer 8: Used 17 unique experts.
+   Top Expert Load: 18.8% (Expert 23)
+Layer 9: Used 19 unique experts.
+   Top Expert Load: 21.2% (Expert 8)
+Layer 10: Used 15 unique experts.
+   Top Expert Load: 22.5% (Expert 10)
+Layer 11: Used 20 unique experts.
+   Top Expert Load: 22.5% (Expert 30)
+Layer 12: Used 16 unique experts.
+   Top Expert Load: 15.0% (Expert 21)
+Layer 13: Used 18 unique experts.
+   Top Expert Load: 23.8% (Expert 21)
+Layer 14: Used 21 unique experts.
+   Top Expert Load: 22.5% (Expert 6)
+Layer 15: Used 22 unique experts.
+   Top Expert Load: 12.5% (Expert 28)
+Layer 16: Used 17 unique experts.
+   Top Expert Load: 18.8% (Expert 31)
+Layer 17: Used 19 unique experts.
+   Top Expert Load: 15.0% (Expert 11)
+Layer 18: Used 19 unique experts.
+   Top Expert Load: 22.5% (Expert 1)
+Layer 19: Used 21 unique experts.
+   Top Expert Load: 12.5% (Expert 6)
+Layer 20: Used 26 unique experts.
+   Top Expert Load: 10.0% (Expert 19)
+Layer 21: Used 16 unique experts.
+   Top Expert Load: 17.5% (Expert 3)
+Layer 22: Used 17 unique experts.
+   Top Expert Load: 16.2% (Expert 25)
+Layer 23: Used 19 unique experts.
+   Top Expert Load: 20.0% (Expert 31)

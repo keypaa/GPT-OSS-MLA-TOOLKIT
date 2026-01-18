@@ -1,0 +1,1229 @@
+--- FULL ARCHITECTURE FOR openai/gpt-oss-20b ---
+
+GptOssForCausalLM(
+  (model): GptOssModel(
+    (embed_tokens): Embedding(201088, 2880, padding_idx=199999)
+    (layers): ModuleList(
+      (0-23): 24 x GptOssDecoderLayer(
+        (self_attn): GptOssAttention(
+          (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+          (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+          (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+          (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+        )
+        (mlp): GptOssMLP(
+          (router): GptOssTopKRouter()
+          (experts): GptOssExperts()
+        )
+        (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+        (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+      )
+    )
+    (norm): GptOssRMSNorm((2880,), eps=1e-05)
+    (rotary_emb): GptOssRotaryEmbedding()
+  )
+  (lm_head): Linear(in_features=2880, out_features=201088, bias=False)
+)
+
+--- DETAILED MODULE LIST ---
+[]: GptOssForCausalLM(
+  (model): GptOssModel(
+    (embed_tokens): Embedding(201088, 2880, padding_idx=199999)
+    (layers): ModuleList(
+      (0-23): 24 x GptOssDecoderLayer(
+        (self_attn): GptOssAttention(
+          (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+          (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+          (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+          (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+        )
+        (mlp): GptOssMLP(
+          (router): GptOssTopKRouter()
+          (experts): GptOssExperts()
+        )
+        (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+        (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+      )
+    )
+    (norm): GptOssRMSNorm((2880,), eps=1e-05)
+    (rotary_emb): GptOssRotaryEmbedding()
+  )
+  (lm_head): Linear(in_features=2880, out_features=201088, bias=False)
+)
+----------------------------------------
+[model]: GptOssModel(
+  (embed_tokens): Embedding(201088, 2880, padding_idx=199999)
+  (layers): ModuleList(
+    (0-23): 24 x GptOssDecoderLayer(
+      (self_attn): GptOssAttention(
+        (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+        (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+        (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+        (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+      )
+      (mlp): GptOssMLP(
+        (router): GptOssTopKRouter()
+        (experts): GptOssExperts()
+      )
+      (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+      (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+    )
+  )
+  (norm): GptOssRMSNorm((2880,), eps=1e-05)
+  (rotary_emb): GptOssRotaryEmbedding()
+)
+----------------------------------------
+[model.embed_tokens]: Embedding(201088, 2880, padding_idx=199999)
+----------------------------------------
+[model.layers]: ModuleList(
+  (0-23): 24 x GptOssDecoderLayer(
+    (self_attn): GptOssAttention(
+      (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+      (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+      (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+      (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+    )
+    (mlp): GptOssMLP(
+      (router): GptOssTopKRouter()
+      (experts): GptOssExperts()
+    )
+    (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+    (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  )
+)
+----------------------------------------
+[model.layers.0]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.0.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.0.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.0.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.0.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.0.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.0.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.0.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.0.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.0.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.0.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.1]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.1.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.1.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.1.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.1.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.1.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.1.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.1.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.1.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.1.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.1.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.2]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.2.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.2.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.2.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.2.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.2.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.2.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.2.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.2.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.2.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.2.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.3]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.3.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.3.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.3.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.3.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.3.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.3.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.3.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.3.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.3.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.3.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.4]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.4.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.4.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.4.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.4.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.4.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.4.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.4.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.4.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.4.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.4.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.5]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.5.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.5.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.5.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.5.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.5.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.5.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.5.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.5.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.5.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.5.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.6]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.6.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.6.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.6.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.6.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.6.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.6.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.6.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.6.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.6.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.6.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.7]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.7.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.7.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.7.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.7.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.7.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.7.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.7.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.7.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.7.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.7.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.8]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.8.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.8.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.8.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.8.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.8.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.8.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.8.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.8.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.8.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.8.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.9]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.9.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.9.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.9.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.9.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.9.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.9.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.9.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.9.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.9.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.9.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.10]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.10.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.10.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.10.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.10.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.10.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.10.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.10.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.10.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.10.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.10.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.11]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.11.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.11.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.11.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.11.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.11.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.11.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.11.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.11.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.11.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.11.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.12]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.12.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.12.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.12.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.12.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.12.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.12.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.12.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.12.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.12.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.12.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.13]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.13.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.13.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.13.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.13.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.13.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.13.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.13.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.13.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.13.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.13.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.14]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.14.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.14.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.14.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.14.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.14.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.14.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.14.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.14.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.14.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.14.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.15]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.15.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.15.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.15.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.15.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.15.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.15.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.15.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.15.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.15.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.15.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.16]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.16.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.16.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.16.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.16.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.16.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.16.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.16.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.16.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.16.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.16.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.17]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.17.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.17.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.17.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.17.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.17.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.17.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.17.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.17.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.17.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.17.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.18]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.18.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.18.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.18.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.18.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.18.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.18.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.18.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.18.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.18.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.18.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.19]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.19.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.19.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.19.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.19.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.19.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.19.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.19.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.19.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.19.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.19.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.20]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.20.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.20.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.20.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.20.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.20.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.20.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.20.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.20.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.20.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.20.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.21]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.21.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.21.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.21.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.21.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.21.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.21.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.21.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.21.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.21.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.21.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.22]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.22.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.22.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.22.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.22.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.22.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.22.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.22.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.22.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.22.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.22.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.23]: GptOssDecoderLayer(
+  (self_attn): GptOssAttention(
+    (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+    (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+    (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+  )
+  (mlp): GptOssMLP(
+    (router): GptOssTopKRouter()
+    (experts): GptOssExperts()
+  )
+  (input_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+  (post_attention_layernorm): GptOssRMSNorm((2880,), eps=1e-05)
+)
+----------------------------------------
+[model.layers.23.self_attn]: GptOssAttention(
+  (q_proj): Linear(in_features=2880, out_features=4096, bias=True)
+  (k_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (v_proj): Linear(in_features=2880, out_features=512, bias=True)
+  (o_proj): Linear(in_features=4096, out_features=2880, bias=True)
+)
+----------------------------------------
+[model.layers.23.self_attn.q_proj]: Linear(in_features=2880, out_features=4096, bias=True)
+    -> Shape: 2880 x 4096
+----------------------------------------
+[model.layers.23.self_attn.k_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.23.self_attn.v_proj]: Linear(in_features=2880, out_features=512, bias=True)
+    -> Shape: 2880 x 512
+----------------------------------------
+[model.layers.23.self_attn.o_proj]: Linear(in_features=4096, out_features=2880, bias=True)
+    -> Shape: 4096 x 2880
+----------------------------------------
+[model.layers.23.mlp]: GptOssMLP(
+  (router): GptOssTopKRouter()
+  (experts): GptOssExperts()
+)
+----------------------------------------
+[model.layers.23.mlp.router]: GptOssTopKRouter()
+----------------------------------------
+[model.layers.23.mlp.experts]: GptOssExperts()
+----------------------------------------
+[model.layers.23.input_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.layers.23.post_attention_layernorm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.norm]: GptOssRMSNorm((2880,), eps=1e-05)
+----------------------------------------
+[model.rotary_emb]: GptOssRotaryEmbedding()
+----------------------------------------
+[lm_head]: Linear(in_features=2880, out_features=201088, bias=False)
+    -> Shape: 2880 x 201088
+----------------------------------------
