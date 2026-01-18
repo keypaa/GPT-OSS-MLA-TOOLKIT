@@ -1,0 +1,11 @@
+torch>=2.2.0
+transformers>=4.40.2
+accelerate>=0.30.0
+sentence-transformers>=2.7.0
+scikit-learn
+datasets
+huggingface_hub
+bitsandbytes
+scipy
+numpy
+tqdm
