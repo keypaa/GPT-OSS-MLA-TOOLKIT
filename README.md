@@ -2,7 +2,7 @@
 
 **An open-source suite for analyzing, calibrating, and compressing GPT-OSS (MoE) models into Multi-Head Latent Attention (MLA).**
 
-This repository contains the tools used to generate the [SWA/Full Split Calibration Dataset](https://huggingface.co/datasets/YOUR_HF_USERNAME/gpt-oss-calibration-data) and the analysis scripts that debunked early theories about quantization failure modes.
+This repository contains the tools used to generate the [SWA/Full Split Calibration Dataset](https://huggingface.co/datasets/keypa/gpt-oss-calibration-data) and the analysis scripts that debunked early theories about quantization failure modes.
 
 ## 🏆 The Artifacts (Ready to Use)
 We have generated high-signal calibration data using **GTE-Large-v1.5** on **L40S** compute, strictly strictly preserving 8192-token context windows to capture long-range dependencies in code and math.

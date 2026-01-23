@@ -41,8 +41,10 @@ def evaluate_perplexity(model_path):
     encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
 
     # 3. Sliding Window Evaluation
-    max_length = model.config.max_position_embeddings
+    ## max_lenght = 2048 in case of very low VRAM
+    ## stride = 256 in case of very low VRAM
     # Use a smaller window if OOM occurs, but 2048/4096 is standard
+    max_length = model.config.max_position_embeddings
     stride = 512
     seq_len = encodings.input_ids.size(1)
 
