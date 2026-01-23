@@ -16,6 +16,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from transformers import PreTrainedModel, PretrainedConfig
+from transformers.generation import GenerationMixin
 from transformers.modeling_outputs import BaseModelOutputWithPast, CausalLMOutputWithPast
 from transformers.utils import logging
 
@@ -721,7 +722,7 @@ class GptOssMlaModel(GptOssMlaPreTrainedModel):
         return combined_attention_mask
 
 
-class GptOssMlaForCausalLM(GptOssMlaPreTrainedModel):
+class GptOssMlaForCausalLM(GptOssMlaPreTrainedModel, GenerationMixin):
     """GPT-OSS MLA model with language modeling head."""
     
     _tied_weights_keys = ["lm_head.weight"]
