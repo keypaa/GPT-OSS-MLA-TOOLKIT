@@ -78,7 +78,10 @@ def svd_initialize_projections(k_weight, v_weight, latent_dim, device='cpu'):
     error = torch.norm(kv_concat - reconstructed) / torch.norm(kv_concat)
     print(f"Done (error: {error.item():.4f})")
     
-    return kv_a_weight.T, kv_b_weight  # Transpose kv_a for nn.Linear format
+    # Return weights in PyTorch Linear format: [out_features, in_features]
+    # kv_a_proj: [latent_dim, hidden_size] (hidden -> latent)
+    # kv_b_proj: [2*num_kv_heads*head_dim, latent_dim] (latent -> kv)
+    return kv_a_weight, kv_b_weight
 
 
 def copy_moe_weights(source_layer, target_layer):
