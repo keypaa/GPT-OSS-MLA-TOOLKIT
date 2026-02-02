@@ -391,12 +391,35 @@ def convert_model_to_mla(
     if device == 'cuda':
         torch.cuda.empty_cache()
     print("   ✓ Source model freed")
+    
+    # Force Python to release memory before saving
+    print("   Running aggressive garbage collection...")
+    import gc as gc_module
+    for _ in range(3):  # Multiple GC passes
+        gc_module.collect()
+    print("   ✓ Memory cleaned")
     print()
     
     # Save model
     print(f"8. Saving MLA model to {output_path}...")
     os.makedirs(output_path, exist_ok=True)
-    mla_model.save_pretrained(output_path)
+    
+    # Memory-efficient saving with small shards
+    print("   Using memory-efficient saving (1GB shards to minimize peak RAM)...")
+    try:
+        mla_model.save_pretrained(
+            output_path,
+            safe_serialization=True,  # Use safetensors (more efficient)
+            max_shard_size="1GB"      # Very small shards to reduce peak memory
+        )
+    except Exception as e:
+        print(f"   ⚠ Error with safetensors, trying standard pickle format: {e}")
+        mla_model.save_pretrained(
+            output_path,
+            safe_serialization=False,
+            max_shard_size="1GB"
+        )
+    
     tokenizer.save_pretrained(output_path)
     print("   ✓ Model saved")
     print()
