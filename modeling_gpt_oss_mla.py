@@ -734,10 +734,11 @@ class GptOssMlaForCausalLM(GptOssMlaPreTrainedModel, GenerationMixin):
         # Initialize weights and apply final processing
         self.post_init()
     
-    def tie_weights(self):
+    def tie_weights(self, **kwargs):
         """
         Override tie_weights to prevent weight tying issues during save.
         We keep embeddings and lm_head separate.
+        Accepts any keyword arguments for compatibility with transformers.
         """
         pass
     

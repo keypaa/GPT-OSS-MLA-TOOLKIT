@@ -177,6 +177,18 @@ def convert_model_to_mla(
     print(f"Output: {output_path}")
     print(f"Latent Dimension: {latent_dim}")
     print(f"Device: {device}")
+    
+    # Memory check and warning
+    if device == "cpu":
+        try:
+            import psutil
+            available_ram_gb = psutil.virtual_memory().available / (1024**3)
+            print(f"Available RAM: {available_ram_gb:.1f} GB")
+            if available_ram_gb < 80:
+                print("⚠️  WARNING: Low RAM detected. Conversion may fail or be very slow.")
+                print(f"   Recommended: 80+ GB free RAM, you have {available_ram_gb:.1f} GB")
+        except ImportError:
+            pass
     print()
     
     # Load source model
@@ -274,6 +286,10 @@ def convert_model_to_mla(
     mla_model.model.embed_tokens.weight.data.copy_(source_model.model.embed_tokens.weight.data)
     mla_model.model.embed_tokens.to('cpu')  # Move back to CPU
     print("   ✓ Embeddings copied")
+    
+    # Free source embeddings to save memory
+    del source_model.model.embed_tokens
+    gc.collect()
     print()
     
     # Copy LM head (move to source device temporarily)
@@ -283,6 +299,10 @@ def convert_model_to_mla(
     mla_model.lm_head.weight.data.copy_(source_model.lm_head.weight.data)
     mla_model.lm_head.to('cpu')  # Move back to CPU
     print("   ✓ LM head copied")
+    
+    # Free source LM head
+    del source_model.lm_head
+    gc.collect()
     print()
     
     # Copy final norm (move to source device temporarily)
@@ -292,11 +312,15 @@ def convert_model_to_mla(
     mla_model.model.norm.weight.data.copy_(source_model.model.norm.weight.data)
     mla_model.model.norm.to('cpu')  # Move back to CPU
     print("   ✓ Final norm copied")
+    
+    # Free source norm
+    del source_model.model.norm
+    gc.collect()
     print()
     
     # Convert layers
     print(f"7. Converting {source_config.num_hidden_layers} decoder layers...")
-    print("   (Processing one layer at a time to minimize memory)")
+    print("   (Processing one layer at a time, freeing source memory as we go)")
     print()
     
     for layer_idx in tqdm(range(source_config.num_hidden_layers), desc="   Converting layers"):
@@ -343,18 +367,30 @@ def convert_model_to_mla(
         print("        → Copying MoE:")
         copy_moe_weights(src_layer, tgt_layer)
         
+        # CRITICAL: Delete source layer to free memory immediately
+        del src_layer
+        source_model.model.layers[layer_idx] = None  # Clear reference
+        
         # Move target layer back to CPU to free GPU memory
         tgt_layer.to('cpu')
         
-        print()
+        # Force garbage collection after each layer
+        gc.collect()
+        if device == 'cuda':
+            torch.cuda.empty_cache()
         
-        # Cleanup every 5 layers
-        if layer_idx % 5 == 0:
-            gc.collect()
-            if device == 'cuda':
-                torch.cuda.empty_cache()
+        print()
     
     print("   ✓ All layers converted")
+    print()
+    
+    # CRITICAL: Delete source model completely before saving to free maximum memory
+    print("   Freeing source model memory...")
+    del source_model
+    gc.collect()
+    if device == 'cuda':
+        torch.cuda.empty_cache()
+    print("   ✓ Source model freed")
     print()
     
     # Save model
