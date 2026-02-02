@@ -111,6 +111,7 @@ def convert_model_to_mla(
     load_in_8bit=False,
     gpu_mem_limit=None,
     cpu_mem_limit=None,
+    offload_folder=None,
 ):
     """
     Convert GPT-OSS GQA model to MLA architecture.
@@ -151,6 +152,14 @@ def convert_model_to_mla(
 
     if max_memory:
         load_kwargs["max_memory"] = max_memory
+    
+    # MoE models need offload_folder when using device_map="auto"
+    if device == "cuda":
+        if offload_folder is None:
+            offload_folder = os.path.join(output_path, "offload_temp")
+        os.makedirs(offload_folder, exist_ok=True)
+        load_kwargs["offload_folder"] = offload_folder
+        print(f"   Using offload folder: {offload_folder}")
     
     if load_in_8bit and device == "cuda":
         print("   Attempting 8-bit mode...")
@@ -309,6 +318,17 @@ def convert_model_to_mla(
     print("   ✓ Model saved")
     print()
     
+    # Cleanup offload folder if it was auto-created
+    if device == "cuda" and offload_folder and os.path.exists(offload_folder):
+        try:
+            import shutil
+            shutil.rmtree(offload_folder)
+            print(f"   ✓ Cleaned up offload folder: {offload_folder}")
+            print()
+        except Exception as e:
+            print(f"   ⚠ Could not remove offload folder: {e}")
+            print()
+    
     # Summary
     print("="*80)
     print("CONVERSION COMPLETE!")
@@ -369,6 +389,12 @@ def main():
         default=None,
         help="Max CPU memory budget (e.g., 28GiB); defaults to 28GiB when using cuda"
     )
+    parser.add_argument(
+        "--offload-folder",
+        type=str,
+        default=None,
+        help="Folder for offloading weights during loading (auto-created if not specified)"
+    )
     
     args = parser.parse_args()
     
@@ -384,7 +410,8 @@ def main():
         device=args.device,
         load_in_8bit=args.load_in_8bit,
         gpu_mem_limit=args.gpu_mem,
-        cpu_mem_limit=args.cpu_mem
+        cpu_mem_limit=args.cpu_mem,
+        offload_folder=args.offload_folder,
     )
 
 
