@@ -188,7 +188,7 @@ def convert_model_to_mla(
         num_key_value_heads=source_config.num_key_value_heads,
         head_dim=getattr(source_config, 'head_dim', 64),
         kv_lora_rank=latent_dim,  # MLA compression dimension
-        rope_theta=source_config.rope_theta,
+        rope_theta=getattr(source_config, 'rope_theta', 10000.0),
         rope_scaling=getattr(source_config, 'rope_scaling', None),
         max_position_embeddings=source_config.max_position_embeddings,
         rms_norm_eps=getattr(source_config, 'rms_norm_eps', 1e-5),
@@ -199,8 +199,8 @@ def convert_model_to_mla(
         sliding_window=getattr(source_config, 'sliding_window', 128),
         attention_bias=getattr(source_config, 'attention_bias', True),
         attention_dropout=getattr(source_config, 'attention_dropout', 0.0),
-        pad_token_id=source_config.pad_token_id,
-        eos_token_id=source_config.eos_token_id,
+        pad_token_id=getattr(source_config, 'pad_token_id', None),
+        eos_token_id=getattr(source_config, 'eos_token_id', None),
     )
     
     # Calculate cache reduction
