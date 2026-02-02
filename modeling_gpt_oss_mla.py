@@ -725,8 +725,6 @@ class GptOssMlaModel(GptOssMlaPreTrainedModel):
 class GptOssMlaForCausalLM(GptOssMlaPreTrainedModel, GenerationMixin):
     """GPT-OSS MLA model with language modeling head."""
     
-    _tied_weights_keys = ["lm_head.weight"]
-    
     def __init__(self, config):
         super().__init__(config)
         self.model = GptOssMlaModel(config)
@@ -735,6 +733,13 @@ class GptOssMlaForCausalLM(GptOssMlaPreTrainedModel, GenerationMixin):
         
         # Initialize weights and apply final processing
         self.post_init()
+    
+    def tie_weights(self):
+        """
+        Override tie_weights to prevent weight tying issues during save.
+        We keep embeddings and lm_head separate.
+        """
+        pass
     
     def get_input_embeddings(self):
         return self.model.embed_tokens

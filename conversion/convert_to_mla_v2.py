@@ -94,41 +94,58 @@ def copy_moe_weights(source_layer, target_layer):
         # Experts - handle GptOssExperts object
         if hasattr(source_layer.mlp, 'experts'):
             try:
-                # Try to get number of experts
-                if hasattr(source_layer.mlp.experts, 'num_experts'):
-                    num_experts = source_layer.mlp.experts.num_experts
-                else:
-                    # Try to access via ModuleList or similar
-                    num_experts = len(list(source_layer.mlp.experts.children()))
+                # Get the actual expert modules
+                src_experts_module = source_layer.mlp.experts
+                tgt_experts_module = target_layer.mlp.experts
                 
-                # Copy each expert by index
+                # Try different ways to access experts
+                if hasattr(src_experts_module, 'experts'):
+                    # ModuleList stored as .experts attribute
+                    src_experts_list = src_experts_module.experts
+                    tgt_experts_list = tgt_experts_module.experts
+                elif hasattr(src_experts_module, 'children'):
+                    # Get via children()
+                    src_experts_list = list(src_experts_module.children())
+                    tgt_experts_list = list(tgt_experts_module.children())
+                else:
+                    # Try direct indexing
+                    src_experts_list = [src_experts_module[i] for i in range(getattr(src_experts_module, 'num_experts', 32))]
+                    tgt_experts_list = [tgt_experts_module[i] for i in range(getattr(tgt_experts_module, 'num_experts', 32))]
+                
+                # Determine number of experts to copy
+                num_experts = min(len(src_experts_list), len(tgt_experts_list))
+                
+                if num_experts == 0:
+                    print(f"        ⚠ No experts found in source or target")
+                    return
+                
+                # Copy each expert
+                copied = 0
                 for i in range(num_experts):
-                    # Access experts via indexing or attribute access
-                    if hasattr(source_layer.mlp.experts, '__getitem__'):
-                        src_expert = source_layer.mlp.experts[i]
-                        tgt_expert = target_layer.mlp.experts[i]
-                    else:
-                        # Try via children
-                        src_experts_list = list(source_layer.mlp.experts.children())
-                        tgt_experts_list = list(target_layer.mlp.experts.children())
+                    try:
                         src_expert = src_experts_list[i]
                         tgt_expert = tgt_experts_list[i]
-                    
-                    # Copy gate, up, down projections
-                    if hasattr(src_expert, 'gate_proj'):
-                        tgt_expert.gate_proj.weight.data.copy_(src_expert.gate_proj.weight.data)
-                    if hasattr(src_expert, 'up_proj'):
-                        tgt_expert.up_proj.weight.data.copy_(src_expert.up_proj.weight.data)
-                    if hasattr(src_expert, 'down_proj'):
-                        tgt_expert.down_proj.weight.data.copy_(src_expert.down_proj.weight.data)
-                    
-                    # Handle gate_up_proj if it exists (fused version)
-                    if hasattr(src_expert, 'gate_up_proj'):
-                        tgt_expert.gate_up_proj.weight.data.copy_(src_expert.gate_up_proj.weight.data)
+                        
+                        # Copy gate_up_proj if it exists (fused version)
+                        if hasattr(src_expert, 'gate_up_proj') and hasattr(tgt_expert, 'gate_up_proj'):
+                            tgt_expert.gate_up_proj.weight.data.copy_(src_expert.gate_up_proj.weight.data)
+                            copied += 1
+                        # Otherwise copy separate projections
+                        else:
+                            if hasattr(src_expert, 'gate_proj') and hasattr(tgt_expert, 'gate_proj'):
+                                tgt_expert.gate_proj.weight.data.copy_(src_expert.gate_proj.weight.data)
+                            if hasattr(src_expert, 'up_proj') and hasattr(tgt_expert, 'up_proj'):
+                                tgt_expert.up_proj.weight.data.copy_(src_expert.up_proj.weight.data)
+                            if hasattr(src_expert, 'down_proj') and hasattr(tgt_expert, 'down_proj'):
+                                tgt_expert.down_proj.weight.data.copy_(src_expert.down_proj.weight.data)
+                            copied += 1
+                    except Exception as e:
+                        print(f"        ⚠ Error copying expert {i}: {e}")
+                        continue
                 
-                print(f"        ✓ {num_experts} Experts")
+                print(f"        ✓ {copied}/{num_experts} Experts copied")
             except Exception as e:
-                print(f"        ⚠ Error copying experts: {e}")
+                print(f"        ⚠ Error accessing experts: {e}")
     else:
         print("        ⚠ MoE structure not found, skipping")
 
